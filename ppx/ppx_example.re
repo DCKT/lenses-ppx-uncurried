@@ -160,6 +160,7 @@ let createGadt = (. gadtFieldName, fields) => {
                       loc: Location.none,
                     },
                     pcd_args: Pcstr_tuple([]),
+                    pcd_vars: [],
                     pcd_res:
                       Some({
                         ptyp_loc_stack: [],
@@ -240,14 +241,14 @@ module StructureMapper = {
   let mapStructureItem = (. mapper, {pstr_desc, _} as structureItem) =>
     switch (pstr_desc) {
     | Pstr_type(_recFlag, decls) =>
-      let valueBindings = decls |> List.map(., mapTypeDecl(.)) |> List.concat;
+      let valueBindings = decls |> List.map(. e => mapTypeDecl(. e)) |> List.concat;
       [mapper#structure_item(structureItem)]
       @ (List.length(valueBindings) > 0 ? valueBindings : []);
 
     | _ => [mapper#structure_item(structureItem)]
     };
   let mapStructure = (. mapper, structure) =>
-    structure |> List.map(., mapStructureItem(., mapper)) |> List.concat;
+    structure |> List.map(. mapStructureItem(. mapper)) |> List.concat;
 };
 
 class lensesMapper = {
@@ -307,6 +308,7 @@ let structure_mapper = (. s) => (new lensesMapper)#structure(. s);
 
 let () =
   Driver.register_transformation(
+  .
     ~preprocess_impl=structure_mapper,
     "ppx_example"
   );
