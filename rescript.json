@@ -1,0 +1,27 @@
+{
+  "name": "my-rescript-ppx",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "test",
+      "type": "dev"
+    }
+  ],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": false
+  },
+  "suffix": ".bs.js",
+  "uncurried": true,
+  "bs-dependencies": ["@rescript/core"],
+  "ppx-flags": [
+    "/Users/thomasdeconinck/Projects/perso/lenses/_build/default/bin/bin.exe"
+  ],
+  "warnings": {
+    "error": "+101"
+  }
+}

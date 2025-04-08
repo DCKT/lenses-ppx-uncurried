@@ -1,0 +1,24 @@
+{
+  "name": "my-rescript-ppx",
+  "version": "0.1.0",
+  "description": "A ReScript project with custom PPX",
+  "scripts": {
+    "build": "npm run build:ppx && rescript build -with-deps",
+    "build:ppx": "dune build",
+    "clean": "rescript clean && dune clean",
+    "start": "rescript build -w",
+    "test": "rescript build -with-deps && node lib/js/test/TestPPX.bs.js"
+  },
+  "keywords": [
+    "rescript",
+    "ppx"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "rescript": "11.1.4"
+  },
+  "devDependencies": {
+    "@rescript/core": "^0.5.0"
+  }
+}
